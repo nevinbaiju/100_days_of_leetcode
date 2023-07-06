@@ -1,0 +1,26 @@
+class Solution(object):
+    def combinationSum2(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        
+        ans = []
+        stack = []
+        candidates = sorted(candidates)
+        n = len(candidates)
+        
+        def backtrack(i=0, total=0, skipped=None):
+            if total == target:
+                ans.append(list(stack))
+            elif i < n and total < target:
+                if candidates[i] != skipped:
+                    stack.append(candidates[i])
+                    backtrack(i+1, total+candidates[i])
+                    stack.pop()
+                backtrack(i+1, total, candidates[i])
+        
+        backtrack()
+        
+        return ans
