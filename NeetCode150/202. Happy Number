@@ -1,0 +1,13 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        visited = set()
+        while n not in visited:
+            temp_sum = 0
+            visited.add(n)
+            while n:
+                temp_sum += (n%10)**2
+                n //= 10
+            if temp_sum == 1:
+                return True
+            n = temp_sum
+        return False
